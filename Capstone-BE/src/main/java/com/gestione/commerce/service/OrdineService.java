@@ -1,7 +1,6 @@
 package com.gestione.commerce.service;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import com.gestione.commerce.model.Azienda;
 import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.repository.OrdineDao;
-import com.github.javafaker.Faker;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -24,26 +22,18 @@ public class OrdineService {
     private AziendaService aziendaService;
     @Autowired
     private FatturaService fatturaService;
-    // @Autowired
-    // private UtenteService utenteService;
 
     @Autowired
     @Qualifier("FakeOrdine")
     private ObjectProvider<Ordine> objOrdine;
-
-    private Faker fake = Faker.instance(new Locale("it-IT"));
 
     public void createOrdine() {
 	Ordine o = objOrdine.getObject();
 	ordineDao.save(o);
 	Azienda a = aziendaService.FindAziendaById(1l);
 	Fattura f = fatturaService.createFattura(o);
-	// List<Utente> listaUtenti = utenteService.findAll();
-	// Integer random = fake.number().numberBetween(0, listaUtenti.size() - 1);
-	// Utente u = listaUtenti.get(random);
 	o.setAzienda(a);
 	o.setFattura(f);
-	// o.setUtente(u);
 	ordineDao.save(o);
     }
 

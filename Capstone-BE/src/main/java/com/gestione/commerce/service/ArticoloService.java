@@ -1,7 +1,6 @@
 package com.gestione.commerce.service;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.gestione.commerce.model.Articolo;
-import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.repository.ArticoloDao;
-import com.github.javafaker.Faker;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -19,21 +16,21 @@ import jakarta.persistence.EntityNotFoundException;
 public class ArticoloService {
     @Autowired
     private ArticoloDao articoloDao;
-    @Autowired
-    private OrdineService ordineService;
+    // @Autowired
+    // private OrdineService ordineService;
 
     @Autowired
     @Qualifier("FakeArticolo")
     private ObjectProvider<Articolo> objArticolo;
 
-    private Faker fake = Faker.instance(new Locale("it-IT"));
+    // private Faker fake = Faker.instance(new Locale("it-IT"));
 
     public void createArticolo() {
 	Articolo a = objArticolo.getObject();
-	List<Ordine> listaOrdini = ordineService.findAll();
-	Integer random = fake.number().numberBetween(0, listaOrdini.size() - 1);
-	Ordine o = listaOrdini.get(random);
-	a.setOrdine(o);
+	// List<Ordine> listaOrdini = ordineService.findAll();
+	// Integer random = fake.number().numberBetween(0, listaOrdini.size() - 1);
+	// Ordine o = listaOrdini.get(random);
+	// a.setOrdini(listaOrdini);
 	articoloDao.save(a);
     }
 

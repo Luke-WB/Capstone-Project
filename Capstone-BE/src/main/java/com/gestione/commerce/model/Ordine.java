@@ -14,8 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -41,17 +41,19 @@ public class Ordine {
     private StatoOrdine statoOrdine;
     private Double prezzoConsegna;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH,
+	    CascadeType.PERSIST })
     @JsonIgnoreProperties({ "ordine" })
     private Fattura fattura;
 
     // AZIENDA TABELLA A PARTE
     @ManyToOne
     @JoinColumn(name = "azienda_id")
+    @JsonIgnoreProperties("ordini")
     private Azienda azienda;
 
-    @OneToMany(mappedBy = "ordine", fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE,
-	    CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+    @JsonIgnoreProperties("ordine")
     private List<Articolo> articoli;
 
     @ManyToOne
