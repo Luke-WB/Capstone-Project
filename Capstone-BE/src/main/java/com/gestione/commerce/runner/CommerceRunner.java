@@ -9,7 +9,6 @@ import com.gestione.commerce.service.ArticoloService;
 import com.gestione.commerce.service.AziendaService;
 import com.gestione.commerce.service.CorriereService;
 import com.gestione.commerce.service.OrdineService;
-import com.gestione.commerce.service.UtenteService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,14 +24,12 @@ public class CommerceRunner implements ApplicationRunner {
     private OrdineService ordineService;
     @Autowired
     private CorriereService corriereService;
-    @Autowired
-    private UtenteService utenteService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
 	if (corriereService.findAll().isEmpty()) {
-	    for (int i = 0; i < 30; i++) {
+	    for (int i = 0; i < 10; i++) {
 		corriereService.createCorriere();
 	    }
 	    log.info("Corrieri creati!");

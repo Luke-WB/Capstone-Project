@@ -46,14 +46,9 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	http.cors().and().csrf().disable().authorizeHttpRequests((authorize) -> authorize
-		.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
-		.requestMatchers(HttpMethod.POST, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
-		.hasRole("ADMIN")
-		.requestMatchers(HttpMethod.PUT, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
-		.hasRole("ADMIN")
-		.requestMatchers(HttpMethod.DELETE, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
-		.hasRole("ADMIN").requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated())
+	http.cors().and().csrf().disable()
+		.authorizeHttpRequests((authorize) -> authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+			.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll().anyRequest().authenticated())
 		.exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

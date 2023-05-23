@@ -1,7 +1,10 @@
 package com.gestione.auth.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.gestione.commerce.model.Ordine;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -42,9 +46,16 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    private String dataNascita; // VEDERE IL LOCALDATE
+    private String indirizzo;
+    private String numeroTelefono;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE,
+	    CascadeType.REFRESH })
+    private List<Ordine> ordini;
 
 }

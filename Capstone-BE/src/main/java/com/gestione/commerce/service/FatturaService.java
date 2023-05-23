@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.gestione.commerce.model.Fattura;
-import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.repository.FatturaDao;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -22,9 +21,8 @@ public class FatturaService {
     @Qualifier("FakeFattura")
     private ObjectProvider<Fattura> objFattura;
 
-    public Fattura createFattura(Ordine o) {
+    public Fattura createFattura() {
 	Fattura f = objFattura.getObject();
-	f.setOrdine(o);
 	fatturaDao.save(f);
 	return f;
     }

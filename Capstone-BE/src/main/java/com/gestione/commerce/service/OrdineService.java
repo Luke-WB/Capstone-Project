@@ -31,7 +31,7 @@ public class OrdineService {
 	Ordine o = objOrdine.getObject();
 	ordineDao.save(o);
 	Azienda a = aziendaService.FindAziendaById(1l);
-	Fattura f = fatturaService.createFattura(o);
+	Fattura f = fatturaService.createFattura();
 	o.setAzienda(a);
 	o.setFattura(f);
 	ordineDao.save(o);

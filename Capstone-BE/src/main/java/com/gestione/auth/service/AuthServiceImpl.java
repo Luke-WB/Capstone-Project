@@ -3,7 +3,6 @@ package com.gestione.auth.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,13 +20,9 @@ import com.gestione.auth.payload.RegisterDto;
 import com.gestione.auth.repository.RoleRepository;
 import com.gestione.auth.repository.UserRepository;
 import com.gestione.auth.security.JwtTokenProvider;
-import com.gestione.commerce.service.UtenteService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-
-    @Autowired
-    private UtenteService utenteService;
 
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
@@ -76,6 +71,9 @@ public class AuthServiceImpl implements AuthService {
 	user.setUsername(registerDto.getUsername());
 	user.setEmail(registerDto.getEmail());
 	user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+	user.setDataNascita(registerDto.getDataNascita());
+	user.setIndirizzo(registerDto.getIndirizzo());
+	user.setNumeroTelefono(registerDto.getNumeroTelefono());
 
 	Set<Role> roles = new HashSet<>();
 
@@ -92,8 +90,6 @@ public class AuthServiceImpl implements AuthService {
 
 	user.setRoles(roles);
 	System.out.println(user);
-	userRepository.save(user);
-	utenteService.createUtente(user);
 	userRepository.save(user);
 
 	return "User registered successfully!";

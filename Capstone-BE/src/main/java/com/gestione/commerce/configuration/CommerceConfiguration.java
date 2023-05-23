@@ -15,24 +15,12 @@ import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.model.StatoOrdine;
 import com.gestione.commerce.model.TipoCorriere;
-import com.gestione.commerce.model.Utente;
 import com.github.javafaker.Faker;
 
 @Configuration
 public class CommerceConfiguration {
 
     private Faker fake = Faker.instance(new Locale("it-IT"));
-
-    @Bean("FakeUtente")
-    @Scope("prototype")
-    public Utente fakeUtente() {
-	Date from = new Date(100, 0, 1); // aggiunge 1900 all'anno
-	Date to = new Date();
-	Date insertDate = fake.date().between(from, to);
-	return Utente.builder().indirizzo(fake.address().streetAddress())
-		.dataNascita(LocalDate.of(insertDate.getYear() + 1900, insertDate.getMonth() + 1, insertDate.getDate()))
-		.numeroTelefono(fake.phoneNumber().phoneNumber()).build();
-    }
 
     @Bean("FakeArticolo")
     @Scope("prototype")
