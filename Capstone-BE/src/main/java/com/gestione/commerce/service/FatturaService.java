@@ -1,13 +1,14 @@
 package com.gestione.commerce.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.gestione.commerce.model.Articolo;
 import com.gestione.commerce.model.Fattura;
+import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.repository.FatturaDao;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -18,16 +19,24 @@ public class FatturaService {
     private FatturaDao fatturaDao;
 
     @Autowired
-    @Qualifier("FakeFattura")
-    private ObjectProvider<Fattura> objFattura;
+    private OrdineService ordineService;
 
     public Fattura createFattura() {
-	Fattura f = objFattura.getObject();
+	Fattura f = new Fattura();
 	fatturaDao.save(f);
 	return f;
     }
 
-    public String postFattura(Fattura f) {
+    public String postFattura(Long idOrdine) {
+
+	Ordine o = ordineService.FindOrdineById(idOrdine);
+	Fattura f = new Fattura();
+	f.setOrdine(o);
+	List<Double> numbers = o.getCarrello().getArticoli().stream().map(Articolo::getPrezzo)
+		.collect(Collectors.toList());
+	Double result = numbers.stream().reduce((double) 0, (subtotal, element) -> subtotal + element);
+	f.setImportoTotale(o.getPrezzoConsegna() + result);
+	f.setQuantitaArticolo(o.getCarrello().getArticoli().size());
 	fatturaDao.save(f);
 	return "Fattura correctly persisted on Database!";
     }

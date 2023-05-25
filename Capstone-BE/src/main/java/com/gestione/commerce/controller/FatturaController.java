@@ -34,9 +34,9 @@ public class FatturaController {
 	return new ResponseEntity<>(fatturaService.FindFatturaById(id), HttpStatus.FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<?> addNewFattura(@RequestBody Fattura f) {
-	return new ResponseEntity<String>(fatturaService.postFattura(f), HttpStatus.CREATED);
+    @PostMapping("/ordine/{idOrdine}")
+    public ResponseEntity<?> addNewFattura(@PathVariable Long idOrdine) {
+	return new ResponseEntity<String>(fatturaService.postFattura(idOrdine), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

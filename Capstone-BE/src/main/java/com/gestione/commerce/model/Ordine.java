@@ -46,18 +46,19 @@ public class Ordine {
     @JsonIgnoreProperties({ "ordini" })
     private Azienda azienda;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH,
-	    CascadeType.PERSIST })
-    @JsonIgnoreProperties({ "ordine" })
-    private Fattura fattura;
+    // @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE,
+    // CascadeType.REMOVE, CascadeType.REFRESH,
+//	    CascadeType.PERSIST })
+    // @JsonIgnoreProperties({ "ordine" })
+    // private Fattura fattura;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
     @JsonIgnoreProperties({ "ordine" })
     private Carrello carrello;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({ "ordini" })
+    @JsonIgnoreProperties({ "ordini", "carrello" })
     private User user;
 
 }

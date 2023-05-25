@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Scope;
 
 import com.gestione.commerce.model.Articolo;
 import com.gestione.commerce.model.Azienda;
+import com.gestione.commerce.model.Carrello;
 import com.gestione.commerce.model.Corriere;
-import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.model.StatoOrdine;
 import com.gestione.commerce.model.TipoCorriere;
@@ -25,10 +25,16 @@ public class CommerceConfiguration {
     @Bean("FakeArticolo")
     @Scope("prototype")
     public Articolo fakeArticolo() {
-	return Articolo.builder().nome(fake.commerce().productName()).prezzo("$ " + fake.commerce().price(0, 500))
+	return Articolo.builder().nome(fake.commerce().productName()).prezzo(fake.number().randomDouble(2, 0, 400))
 		.descrizione(fake.commerce().color()).marca(fake.commerce().department())
 		.img("https://static.vecteezy.com/ti/vettori-gratis/p1/4821112-colore-bianco-pollo-cartone-animato-illustrazione-design-design-per-bambini-libro-gratuito-vettoriale.jpg")
 		.quantità(fake.number().numberBetween(0, 100)).build();
+    }
+
+    @Bean("FakeCarrello")
+    @Scope("prototype")
+    public Carrello fakeCarrello() {
+	return Carrello.builder().build();
     }
 
     @Bean("FakeAzienda")
@@ -54,12 +60,7 @@ public class CommerceConfiguration {
 	return type;
     }
 
-    @Bean("FakeFattura")
-    @Scope("prototype")
-    public Fattura fakeFattura() {
-	return Fattura.builder().quantitaArtcolo(15).importoTotale(500).build();
-    }
-
+    @SuppressWarnings("deprecation")
     @Bean("FakeOrdine")
     @Scope("prototype")
     public Ordine fakeOrdine() {

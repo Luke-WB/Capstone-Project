@@ -34,9 +34,9 @@ public class OrdineController {
 	return new ResponseEntity<>(ordineService.FindOrdineById(id), HttpStatus.FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<?> addNewOrdine(@RequestBody Ordine o) {
-	return new ResponseEntity<String>(ordineService.postOrdine(o), HttpStatus.CREATED);
+    @PostMapping("/user/{idUser}/carrello/{idCarrello}")
+    public ResponseEntity<?> addNewOrdine(@PathVariable Long idUser, @PathVariable Long idCarrello) {
+	return new ResponseEntity<String>(ordineService.postOrdine(idUser, idCarrello), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

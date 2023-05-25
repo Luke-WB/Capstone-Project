@@ -3,6 +3,9 @@ package com.gestione.auth.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,9 +23,18 @@ import com.gestione.auth.payload.RegisterDto;
 import com.gestione.auth.repository.RoleRepository;
 import com.gestione.auth.repository.UserRepository;
 import com.gestione.auth.security.JwtTokenProvider;
+import com.gestione.commerce.model.Carrello;
+import com.gestione.commerce.repository.CarrelloDao;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    @Autowired
+    private CarrelloDao carrelloDao;
+
+    @Autowired
+    @Qualifier("FakeCarrello")
+    private ObjectProvider<Carrello> objCarrello;
 
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
@@ -89,6 +101,9 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	user.setRoles(roles);
+	Carrello c = objCarrello.getObject();
+	carrelloDao.save(c);
+	user.setCarrello(c);
 	System.out.println(user);
 	userRepository.save(user);
 

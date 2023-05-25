@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestione.commerce.model.Carrello;
+import com.gestione.commerce.repository.ArticoloDao;
+import com.gestione.commerce.repository.CarrelloArticoliDao;
 import com.gestione.commerce.repository.CarrelloDao;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -15,36 +17,28 @@ public class CarrelloService {
 
     @Autowired
     private CarrelloDao carrelloDao;
+    @Autowired
+    private ArticoloDao articoloDao;
+    @Autowired
+    private CarrelloArticoliDao carrelloArticoliDao;
 
-    public String postCarrello(Carrello c) {
-	carrelloDao.save(c);
-	return "Carrello correctly persisted on Database!";
-    }
-
-    public String updateCarrello(Carrello c) {
-	if (carrelloDao.existsById(c.getId())) {
-	    carrelloDao.save(c);
-	    return "Carrello correctly updated on Database";
+    public String updateArticoliByCarrello(Long articoloId, Long carrelloId) {
+	if (articoloDao.existsById(articoloId) & carrelloDao.existsById(carrelloId)) {
+	    carrelloArticoliDao.aggiungiArticoliByCarrello(articoloId, carrelloId);
+	    return "Articolo aggiunto al carrello";
 	} else {
-	    throw new EntityNotFoundException("Carrello with ID --> " + c.getId() + " doesn't exists on Database!");
+	    throw new EntityNotFoundException("Carrello with ID --> " + carrelloId + " or Articoli with ID --> "
+		    + articoloId + " doesn't exists on Database!");
 	}
     }
 
-    public String deleteCarrello(Carrello c) {
-	if (carrelloDao.existsById(c.getId())) {
-	    carrelloDao.delete(c);
-	    return "Carrello correctly deleted from Database";
+    public String deleteArticoliByCarrello(Long articoloId, Long carrelloId) {
+	if (articoloDao.existsById(articoloId) & carrelloDao.existsById(carrelloId)) {
+	    carrelloArticoliDao.rimuoviArticoliByCarrello(articoloId, carrelloId);
+	    return "Articolo rimosso dal carrello";
 	} else {
-	    throw new EntityNotFoundException("Carrello with ID --> " + c.getId() + " doesn't exists on Database!");
-	}
-    }
-
-    public String deleteCarrello(Long id) {
-	if (carrelloDao.existsById(id)) {
-	    carrelloDao.deleteById(id);
-	    return "Carrello correctly deleted from Database";
-	} else {
-	    throw new EntityNotFoundException("Carrello with ID --> " + id + " doesn't exists on Database!");
+	    throw new EntityNotFoundException("Carrello with ID --> " + carrelloId + " or Articoli with ID --> "
+		    + articoloId + " doesn't exists on Database!");
 	}
     }
 
