@@ -3,7 +3,6 @@ package com.gestione.commerce.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.service.FatturaService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/fattura")
 public class FatturaController {
@@ -34,9 +32,9 @@ public class FatturaController {
 	return new ResponseEntity<>(fatturaService.FindFatturaById(id), HttpStatus.FOUND);
     }
 
-    @PostMapping("/ordine/{idOrdine}")
-    public ResponseEntity<?> addNewFattura(@PathVariable Long idOrdine) {
-	return new ResponseEntity<String>(fatturaService.postFattura(idOrdine), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<?> addNewFattura(@RequestBody Fattura f) {
+	return new ResponseEntity<String>(fatturaService.postFattura(f), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

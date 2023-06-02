@@ -46,19 +46,14 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	http.cors().and().csrf().disable()
-		.authorizeHttpRequests(
-			(authorize) -> authorize
-			.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-			.requestMatchers(HttpMethod.GET, "/api/articolo").permitAll()
-			.requestMatchers(HttpMethod.GET, "/api/carrello", "/api/azienda", "/api/fattura", "/api/ordine", "/api/user").hasAnyRole("USER", "ADMIN")
-			.requestMatchers(HttpMethod.POST, "/api/carrello").hasAnyRole("USER", "ADMIN")
-			.requestMatchers(HttpMethod.PUT, "/api/ordine", "/api/user").hasAnyRole("USER", "ADMIN")
-			.requestMatchers(HttpMethod.DELETE, "/api/carrello", "/api/user").hasAnyRole("USER", "ADMIN")
-			.requestMatchers(HttpMethod.POST, "/api/articolo", "/api/azienda", "/api/fattura","/api/ordine").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.PUT, "/api/articolo","/api/azienda", "/api/fattura").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.DELETE, "/api/articolo", "/api/azienda", "/api/fattura", "/api/ordine").hasRole("ADMIN")
-			.anyRequest().authenticated())
+	http.cors().and().csrf().disable().authorizeHttpRequests((authorize) -> authorize
+		.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER", "ADMIN")
+		.requestMatchers(HttpMethod.POST, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
+		.hasRole("ADMIN")
+		.requestMatchers(HttpMethod.PUT, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
+		.hasRole("ADMIN")
+		.requestMatchers(HttpMethod.DELETE, "/api/customers/**", "/api/invoices/**", "/api/addresses/**")
+		.hasRole("ADMIN").requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated())
 		.exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

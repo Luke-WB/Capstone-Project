@@ -21,7 +21,7 @@ public class Articolo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private Double prezzo;
+    private String prezzo;
     private String descrizione;
     private String marca;
     private String img;

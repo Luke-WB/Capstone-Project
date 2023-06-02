@@ -10,11 +10,12 @@ import org.springframework.context.annotation.Scope;
 
 import com.gestione.commerce.model.Articolo;
 import com.gestione.commerce.model.Azienda;
-import com.gestione.commerce.model.Carrello;
 import com.gestione.commerce.model.Corriere;
+import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.model.StatoOrdine;
 import com.gestione.commerce.model.TipoCorriere;
+import com.gestione.commerce.model.Utente;
 import com.github.javafaker.Faker;
 
 @Configuration
@@ -22,19 +23,24 @@ public class CommerceConfiguration {
 
     private Faker fake = Faker.instance(new Locale("it-IT"));
 
+    @Bean("FakeUtente")
+    @Scope("prototype")
+    public Utente fakeUtente() {
+	Date from = new Date(100, 0, 1); // aggiunge 1900 all'anno
+	Date to = new Date();
+	Date insertDate = fake.date().between(from, to);
+	return Utente.builder().indirizzo(fake.address().streetAddress())
+		.dataNascita(LocalDate.of(insertDate.getYear() + 1900, insertDate.getMonth() + 1, insertDate.getDate()))
+		.numeroTelefono(fake.phoneNumber().phoneNumber()).build();
+    }
+
     @Bean("FakeArticolo")
     @Scope("prototype")
     public Articolo fakeArticolo() {
-	return Articolo.builder().nome(fake.commerce().productName()).prezzo(fake.number().randomDouble(2, 0, 400))
+	return Articolo.builder().nome(fake.commerce().productName()).prezzo("$ " + fake.commerce().price(0, 500))
 		.descrizione(fake.commerce().color()).marca(fake.commerce().department())
 		.img("https://static.vecteezy.com/ti/vettori-gratis/p1/4821112-colore-bianco-pollo-cartone-animato-illustrazione-design-design-per-bambini-libro-gratuito-vettoriale.jpg")
 		.quantità(fake.number().numberBetween(0, 100)).build();
-    }
-
-    @Bean("FakeCarrello")
-    @Scope("prototype")
-    public Carrello fakeCarrello() {
-	return Carrello.builder().build();
     }
 
     @Bean("FakeAzienda")
@@ -60,7 +66,12 @@ public class CommerceConfiguration {
 	return type;
     }
 
-    @SuppressWarnings("deprecation")
+    @Bean("FakeFattura")
+    @Scope("prototype")
+    public Fattura fakeFattura() {
+	return Fattura.builder().quantitaArtcolo(15).importoTotale(500).build();
+    }
+
     @Bean("FakeOrdine")
     @Scope("prototype")
     public Ordine fakeOrdine() {

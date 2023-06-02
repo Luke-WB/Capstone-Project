@@ -1,0 +1,209 @@
+@import "_colori";
+
+body {
+  font-family: "Orbitron", sans-serif;
+  background-color: $viola;
+  color: white;
+  height: 100vh;
+
+  .nav {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+    background-color: $turchese;
+    padding: 15px 0px;
+    .nav-link {
+      color: white;
+    }
+    .img {
+      width: 3%;
+    }
+    #basic-nav-dropdown {
+      color: white;
+    }
+    #basic-nav-dropdown:focus {
+      color: $arancione;
+    }
+    .dropdown-menu.show {
+      //background-color: $turchese;
+      background-color: $bianco-turchese;
+    }
+    a.dropdown-item {
+      color: #ffffff;
+      background-color: transparent;
+    }
+    a.dropdown-item:hover {
+      background-color: $arancione;
+    }
+    .dropdown-divider {
+      border-color: $turchese;
+    }
+    .button {
+      background-color: $turchese;
+      border-color: transparent;
+    }
+    .button:hover {
+      background-color: $arancione;
+      border-color: $turchese;
+    }
+    .icons {
+      font-size: 25px;
+    }
+    .carrello {
+      background-color: transparent;
+      border-color: transparent;
+      position: relative;
+    }
+    .carrello:focus {
+      box-shadow: none;
+    }
+    .badge {
+      background-color: $arancione;
+      position: absolute;
+      left: 40px;
+      top: -5px;
+      text-align: center;
+    }
+
+    .form-control {
+      border-color: transparent;
+      width: 400px\;;
+    }
+    .form-control:focus {
+      width: 700px;
+      box-shadow: 0px 0px 10px 5px aqua;
+    }
+    .form-control::placeholder {
+      color: $turchese;
+    }
+  }
+
+  .containerHome {
+    margin-top: 100px;
+  }
+
+  @mixin sfocus {
+    box-shadow: 0px 0px 100px 0px aqua;
+    border: 1px solid aqua;
+  }
+
+  .immagine img {
+    @include sfocus();
+  }
+
+  .carousel {
+    @include sfocus();
+  }
+
+  .cardCarrello {
+    background-color: $turchese;
+    box-shadow: 0px 0px 20px 5px aqua;
+    .button {
+      background-color: $arancione;
+      border-color: white;
+    }
+    .button:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+    .bordo {
+      border-left: 1px solid white;
+      padding-left: 50px;
+    }
+  }
+
+  .cardArticoli {
+    background-color: $arancione;
+    border: 1px solid aqua;
+    .card-body {
+      border-top: 1px solid white;
+      background-color: $turchese;
+    }
+
+    .button {
+      background-color: $arancione;
+      border-color: white;
+    }
+    .button:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+    &:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+  }
+
+  .partner {
+    background-color: $bianco-turchese;
+  }
+
+  .footer {
+    background-color: $turchese;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    margin-top: 200px;
+    h3 {
+      font-size: 20px;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+.sfondo {
+  background-color: $arancione;
+}
+
+@keyframes pulse {
+  0% {
+    border-radius: 250px;
+    box-shadow: 0px 0px 20px 5px aqua;
+  }
+  25% {
+    border-radius: 250px;
+    box-shadow: 0px 0px 40px 10px aqua;
+    transform: scale(1.3);
+  }
+  50% {
+    border-radius: 250px;
+    box-shadow: 0px 0px 40px 10px aqua;
+    transform: scale(1.5);
+  }
+  75% {
+    border-radius: 250px;
+    box-shadow: 0px 0px 40px 10px aqua;
+    transform: scale(1.3);
+  }
+  100% {
+    border-radius: 250px;
+    box-shadow: 0px 0px 20px 5px aqua;
+  }
+}
+.check {
+  font-size: 80px;
+  border: 1px solid white;
+  color: $arancione;
+  animation: pulse;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.modaleHeader {
+  border: none;
+  .btn-close {
+    color: aqua;
+  }
+  .btn-close:focus {
+    box-shadow: none;
+  }
+}
+
+.modale {
+  background-color: $viola;
+  box-shadow: 0px 0px 40px 5px aqua;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+}

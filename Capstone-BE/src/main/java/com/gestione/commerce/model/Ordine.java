@@ -1,9 +1,9 @@
 package com.gestione.commerce.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gestione.auth.entity.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -40,25 +41,23 @@ public class Ordine {
     private StatoOrdine statoOrdine;
     private Double prezzoConsegna;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH,
+	    CascadeType.PERSIST })
+    @JsonIgnoreProperties({ "ordine" })
+    private Fattura fattura;
+
     // AZIENDA TABELLA A PARTE
     @ManyToOne
     @JoinColumn(name = "azienda_id")
-    @JsonIgnoreProperties({ "ordini" })
+    @JsonIgnoreProperties("ordini")
     private Azienda azienda;
 
-    // @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE,
-    // CascadeType.REMOVE, CascadeType.REFRESH,
-//	    CascadeType.PERSIST })
-    // @JsonIgnoreProperties({ "ordine" })
-    // private Fattura fattura;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-    @JsonIgnoreProperties({ "ordine" })
-    private Carrello carrello;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+    @JsonIgnoreProperties("ordine")
+    private List<Articolo> articoli;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({ "ordini", "carrello" })
-    private User user;
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
 }

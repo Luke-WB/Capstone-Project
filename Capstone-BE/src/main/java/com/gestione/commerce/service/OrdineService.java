@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.gestione.auth.entity.User;
 import com.gestione.commerce.model.Azienda;
-import com.gestione.commerce.model.Carrello;
+import com.gestione.commerce.model.Fattura;
 import com.gestione.commerce.model.Ordine;
 import com.gestione.commerce.repository.OrdineDao;
 
@@ -22,30 +21,24 @@ public class OrdineService {
     @Autowired
     private AziendaService aziendaService;
     @Autowired
-    private UserService userService;
-    @Autowired
-    private CarrelloService carrelloService;
+    private FatturaService fatturaService;
 
     @Autowired
     @Qualifier("FakeOrdine")
     private ObjectProvider<Ordine> objOrdine;
 
-    public void createOrdine(Long idUser, Long idCarrello) {
+    public void createOrdine() {
 	Ordine o = objOrdine.getObject();
 	ordineDao.save(o);
-	// Fattura f = fatturaService.createFattura();
 	Azienda a = aziendaService.FindAziendaById(1l);
+	Fattura f = fatturaService.createFattura(o);
 	o.setAzienda(a);
-	// o.setFattura(f);
-	User u = userService.FindUserById(idUser);
-	Carrello c = carrelloService.FindCarrelloById(idCarrello);
-	o.setUser(u);
-	o.setCarrello(c);
+	o.setFattura(f);
 	ordineDao.save(o);
     }
 
-    public String postOrdine(Long idUser, Long idCarrello) {
-	createOrdine(idUser, idCarrello);
+    public String postOrdine(Ordine o) {
+	ordineDao.save(o);
 	return "Ordine correctly persisted on Database!";
     }
 
