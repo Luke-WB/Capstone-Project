@@ -57,11 +57,11 @@ function Registrazione() {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <Card className="text-center w-25 my-5">
+        <Card className="text-center w-25 my-5 cardCarrello">
           <Card.Body>
-            <Card.Title>Registrazione</Card.Title>
+            <Card.Title className="mb-4">Registrazione</Card.Title>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-              <Form.Group md="4" controlId="validationCustom01">
+              <Form.Group md="4" controlId="validationCustom01" className="mb-4">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control
                   required
@@ -71,7 +71,7 @@ function Registrazione() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustom02">
+              <Form.Group md="4" controlId="validationCustom02" className="mb-4">
                 <Form.Label>Cognome</Form.Label>
                 <Form.Control
                   required
@@ -81,7 +81,7 @@ function Registrazione() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustomUsername">
+              <Form.Group md="4" controlId="validationCustomUsername" className="mb-4">
                 <Form.Label>Username</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -94,7 +94,7 @@ function Registrazione() {
                   <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustom03">
+              <Form.Group md="4" controlId="validationCustom03" className="mb-4">
                 <Form.Label>Data di nascita</Form.Label>
                 <Form.Control
                   required
@@ -104,7 +104,7 @@ function Registrazione() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustom04">
+              <Form.Group md="4" controlId="validationCustom04" className="mb-4">
                 <Form.Label>Indirizzo</Form.Label>
                 <Form.Control
                   required
@@ -114,7 +114,7 @@ function Registrazione() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustom05">
+              <Form.Group md="4" controlId="validationCustom05" className="mb-4">
                 <Form.Label>Cellulare</Form.Label>
                 <Form.Control
                   required
@@ -124,10 +124,12 @@ function Registrazione() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustomEmail">
+              <Form.Group md="4" controlId="validationCustomEmail" className="mb-4">
                 <Form.Label>E-mail</Form.Label>
                 <InputGroup hasValidation>
-                  <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                  <InputGroup.Text id="inputGroupPrepend" className="buttonO text-white">
+                    @
+                  </InputGroup.Text>
                   <Form.Control
                     type="email"
                     placeholder="Email"
@@ -138,7 +140,7 @@ function Registrazione() {
                   <Form.Control.Feedback type="invalid">Please choose an email.</Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
-              <Form.Group md="4" controlId="pwd">
+              <Form.Group md="4" controlId="pwd" className="mb-4">
                 <Form.Label>Password</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -148,11 +150,14 @@ function Registrazione() {
                     required
                     onChange={(e) => handleChange("password", e.target.value)}
                   />
-                  <Button onClick={() => showPwd()}>O</Button>
+                  <Button className="buttonO" onClick={() => showPwd()}>
+                    O
+                  </Button>
                   <Form.Control.Feedback type="invalid">Please choose a password.</Form.Control.Feedback>
                 </InputGroup>
               </Form.Group>
               <Button
+                className="buttonO mt-2 mb-4"
                 onClick={() => {
                   dispatch(regisrazioneUser(input));
                 }}

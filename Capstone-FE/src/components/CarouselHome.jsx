@@ -1,12 +1,12 @@
 import Carousel from "react-bootstrap/Carousel";
 import pow3r from "../assets/img/Pow3r.png";
-import mouseFnatic from "../assets/img/Mouse.png";
+import mouseFnatic from "../assets/img/Mouse - Fnatic.png";
 import ninja from "../assets/img/Ninja.webp";
-import controllerPs5 from "../assets/img/Contreoller-PS5.webp";
-import controllerScuff from "../assets/img/Controller.png";
+import controllerPs5 from "../assets/img/Controller - PS5.webp";
+import controllerScuff from "../assets/img/Controller - SCUFF.png";
 import tfue from "../assets/img/Tfue.webp";
-import tastieraFnatic from "../assets/img/Tastiera.png";
-import tasieraLogi from "../assets/img/Tastiera-logi.jpeg";
+import tastieraFnatic from "../assets/img/Tastiera - Fnatic MiniStreak.png";
+import tasieraLogi from "../assets/img/Tastiera - Logi.jpeg";
 
 function CarouselHome() {
   return (

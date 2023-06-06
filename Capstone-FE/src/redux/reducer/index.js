@@ -2,11 +2,13 @@ import {
   ADD_ID_CARRELLO,
   ADD_ID_FATTURA,
   ADD_ID_ORDINE,
+  ADD_ID_USER,
   ADD_TOKEN,
   ADD_USERNAME,
   ARTICOLI,
   CARRELLO,
   FATTURA,
+  FATTURE,
   ORDINE,
   ORDINI,
   USER,
@@ -15,6 +17,7 @@ import {
 const initialState = {
   token: "",
   username: "",
+  idUser: "",
   idCarrello: "",
   idOrdine: "",
   idFattura: "",
@@ -24,6 +27,7 @@ const initialState = {
   ordine: {},
   ordini: [],
   fattura: {},
+  fatture: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -37,6 +41,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         username: action.payload,
+      };
+    case ADD_ID_USER:
+      return {
+        ...state,
+        idUser: action.payload,
       };
     case ADD_ID_CARRELLO:
       return {
@@ -83,7 +92,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         fattura: action.payload,
       };
-
+    case FATTURE:
+      return {
+        ...state,
+        fatture: action.payload,
+      };
     default:
       return state;
   }

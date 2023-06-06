@@ -1,6 +1,6 @@
-import logoFuture from "../assets/img/Logo.png";
+import logoFuture from "../assets/img/Logo principale - white.png";
 import { BsInstagram, BsDiscord, BsTwitch } from "react-icons/bs";
-import { FaFacebookSquare } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -15,18 +15,26 @@ function Footer() {
       </p>
       <div className="contatti">
         <h5 className="my-4">SOCIAL</h5>
-        <div className="d-flex justify-content-evenly">
+        <div className="d-flex justify-content-evenly ">
           <a href="/instagram">
-            <BsInstagram className="text-white" /> | Instagram
+            <p className="d-flex align-items-center ">
+              <BsInstagram className="text-white me-2" />| Instagram
+            </p>
           </a>
-          <a href="/facebook">
-            <FaFacebookSquare /> | Facebook
+          <a href="/you-tube">
+            <p className="d-flex align-items-center ">
+              <FaYoutube className="text-white me-2" />| You-Tube
+            </p>
           </a>
           <a href="/discord">
-            <BsDiscord /> | Discord
+            <p className="d-flex align-items-center ">
+              <BsDiscord className="text-white me-2" />| Discord
+            </p>
           </a>
           <a href="/twitch">
-            <BsTwitch /> | Twitch
+            <p className="d-flex align-items-center ">
+              <BsTwitch className="text-white me-2" />| Twitch
+            </p>
           </a>
         </div>
       </div>
@@ -35,11 +43,14 @@ function Footer() {
           Legal Stuff
         </a>
         |
-        <a href="https://termly.io/faq/what-is-a-privacy-policy-url/" className="mx-4">
+        <a href="https://commission.europa.eu/privacy-policy-websites-managed-european-commission_en" className="mx-4">
           Privacy Policy
         </a>
         |
-        <a href="https://www.psafe.com/dfndr-lab/" className="mx-4">
+        <a
+          href="https://european-union.europa.eu/institutions-law-budget/institutions-and-bodies/search-all-eu-institutions-and-bodies/european-union-institute-security-studies-euiss_it"
+          className="mx-4"
+        >
           Security
         </a>
       </p>

@@ -1,5 +1,6 @@
 export const ADD_TOKEN = "ADD_TOKEN";
 export const ADD_USERNAME = "ADD_USERNAME";
+export const ADD_ID_USER = "ADD_ID_USER";
 export const ADD_ID_CARRELLO = "ADD_ID_CARRELLO";
 export const ADD_ID_ORDINE = "ADD_ID_ORDINE";
 export const ADD_ID_FATTURA = "ADD_ID_FATTURA";
@@ -9,6 +10,9 @@ export const ARTICOLI = "ARTICOLI";
 export const ORDINE = "ORDINE";
 export const ORDINI = "ORDINI";
 export const FATTURA = "FATTURA";
+export const FATTURE = "FATTURE";
+export const ADD_PREFE = "ADD_PREFE";
+export const REMOVE_PREFE = "REMOVE_PREFE";
 
 export function regisrazioneUser(input) {
   return async () => {
@@ -22,6 +26,7 @@ export function regisrazioneUser(input) {
       });
       if (response.ok) {
         console.log(response);
+        window.location.href = "/login";
       }
     } catch (error) {
       alert("testComment", error);
@@ -42,43 +47,18 @@ export function loginUser(input) {
       console.log(response);
       if (response.ok) {
         const data = await response.json();
+        const token = data.accessToken;
+        const username = data.username;
         console.log(data, " oooooooooooooooo");
         dispatch({
           type: ADD_TOKEN,
-          payload: data.accessToken,
-        }) &&
-          dispatch({
-            type: ADD_USERNAME,
-            payload: data.username,
-          });
-        console.log(data.accessToken);
-        window.location.href = "/";
-      }
-    } catch (error) {
-      alert("testComment", error);
-    }
-  };
-}
-
-export function getUser(token, username) {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`http://localhost:8080/api/user`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data, "data");
-        const userFiltrato = data.filter((e) => e.username === username);
-        dispatch({
-          type: USER,
-          payload: userFiltrato[0],
+          payload: token,
         });
-        dispatch(trovaIdCarrello(userFiltrato[0].id, token));
+        dispatch({
+          type: ADD_USERNAME,
+          payload: username,
+        });
+        window.location.href = "/";
       }
     } catch (error) {
       alert("testComment", error);
@@ -91,15 +71,129 @@ export function logoutUser() {
     dispatch({
       type: ADD_TOKEN,
       payload: "",
-    }) &&
-      dispatch({
-        type: ADD_USERNAME,
-        payload: "",
-      }) &&
-      dispatch({
-        type: ADD_ID_CARRELLO,
-        payload: "",
+    });
+    dispatch({
+      type: ADD_USERNAME,
+      payload: "",
+    });
+    dispatch({
+      type: ADD_ID_USER,
+      payload: "",
+    });
+    dispatch({
+      type: ADD_ID_CARRELLO,
+      payload: "",
+    });
+    dispatch({
+      type: ADD_ID_ORDINE,
+      payload: "",
+    });
+    dispatch({
+      type: ADD_ID_FATTURA,
+      payload: "",
+    });
+    dispatch({
+      type: USER,
+      payload: {},
+    });
+    dispatch({
+      type: CARRELLO,
+      payload: {},
+    });
+    dispatch({
+      type: ORDINE,
+      payload: {},
+    });
+    dispatch({
+      type: ORDINI,
+      payload: [],
+    });
+    dispatch({
+      type: FATTURA,
+      payload: {},
+    });
+    dispatch({
+      type: ARTICOLI,
+      payload: [],
+    });
+    window.location.href = "/";
+  };
+}
+
+export function trovaIdUser(token, username) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/user`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data, "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        const userFiltrato = data.filter((e) => e.username === username);
+        dispatch({
+          type: ADD_ID_USER,
+          payload: userFiltrato[0].id,
+        });
+        dispatch(getUser(userFiltrato[0].id, token));
+        dispatch(trovaIdCarrello(userFiltrato[0].id, token));
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
+  };
+}
+
+export function getUser(idUser, token) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/${idUser}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data, "ooooooooooooooooo");
+        dispatch({
+          type: USER,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
+  };
+}
+
+export function putUser(idUser, token, input) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/${idUser}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+      if (response.ok) {
+        dispatch(
+          dispatch({
+            type: USER,
+            payload: {},
+          })
+        );
+        dispatch(getUser(idUser, token));
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
   };
 }
 
@@ -140,12 +234,13 @@ export function trovaIdCarrello(idUser, token) {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log("oooooookokokokkokokok");
         const carrelloFiltrato = data.filter((e) => e.id === idUser);
-        console.log(carrelloFiltrato[0].id, "oooooooooooooooooo");
         dispatch({
           type: ADD_ID_CARRELLO,
           payload: carrelloFiltrato[0].id,
         });
+        dispatch(getCarrello(carrelloFiltrato[0].id, token));
       }
     } catch (error) {
       alert("testComment", error);
@@ -165,6 +260,7 @@ export function getCarrello(idCarrello, token) {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data, "carrelloooooo");
         dispatch({
           type: CARRELLO,
           payload: data,
@@ -236,7 +332,7 @@ export function creaOrdine(idUser, idCarrello, token) {
   };
 }
 
-export function trovaIdOrdine(token, idUser, idCarrello, carrelloArticoli) {
+export function trovaIdOrdine(token, idUser, idCarrello, carrello) {
   return async (dispatch) => {
     try {
       const response = await fetch(`http://localhost:8080/api/ordine`, {
@@ -248,43 +344,25 @@ export function trovaIdOrdine(token, idUser, idCarrello, carrelloArticoli) {
       });
       if (response.ok) {
         const data = await response.json();
-        const ordineFiltrato = data.filter(
+        const ordineFiltratoArticoliId = data.length - 1 + 1;
+        const ordineId = data.filter(
           (e) =>
             e.user.id === idUser &&
             e.carrello.id === idCarrello &&
-            e.carrello.articoli.length === carrelloArticoli.length &&
-            e.carrello.articoli[0].id === carrelloArticoli[0].id
+            e.articoli.length === carrello.articoli.length &&
+            e.id === ordineFiltratoArticoliId
         );
-        console.log(ordineFiltrato);
+        console.log(
+          data,
+          "ooooooooooooooooooooooooooooooooooooooooooooooooooookkkk",
+          ordineFiltratoArticoliId,
+          ordineId[0].id
+        );
         dispatch({
           type: ADD_ID_ORDINE,
-          payload: ordineFiltrato[0].id,
+          payload: ordineId[0].id,
         });
-      }
-    } catch (error) {
-      alert("testComment", error);
-    }
-  };
-}
-
-export function getOrdini(token, idUser, idCarrello) {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`http://localhost:8080/api/ordine`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        const ordineFiltrato = data.filter((e) => e.user.id === idUser && e.carrello.id === idCarrello);
-        console.log(ordineFiltrato);
-        dispatch({
-          type: ORDINI,
-          payload: ordineFiltrato,
-        });
+        dispatch(getOrdine(ordineId[0].id, token));
       }
     } catch (error) {
       alert("testComment", error);
@@ -316,6 +394,53 @@ export function getOrdine(idOrdine, token) {
   };
 }
 
+export function getOrdini(token, idUser, idCarrello) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/ordine`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const ordiniFiltrati = data.filter((e) => e.user.id === idUser && e.carrello.id === idCarrello);
+        console.log(ordiniFiltrati, "ooooooooooooooooooooo");
+        dispatch({
+          type: ORDINI,
+          payload: ordiniFiltrati,
+        });
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
+  };
+}
+export function getStatoOrdine(token, idUser, idCarrello, numeroOrdine) {
+  return async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/ordine`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const ordiniFiltrati = data.filter(
+          (e) => e.user.id === idUser && e.carrello.id === idCarrello && e.numero === numeroOrdine
+        );
+        console.log(ordiniFiltrati, "ooooooooooooooooooooo");
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
+  };
+}
+
 export function creaFattura(idOrdine, token) {
   return async () => {
     try {
@@ -328,6 +453,7 @@ export function creaFattura(idOrdine, token) {
       });
       if (response.ok) {
         console.log(response);
+        window.location.href = "/ordine-confermato";
       }
     } catch (error) {
       alert("testComment", error);
@@ -347,12 +473,14 @@ export function trovaIdFattura(token, idOrdine) {
       });
       if (response.ok) {
         const data = await response.json();
+        const ok = data.map((e) => e.id);
         const fatturaFiltrata = data.filter((e) => e.id === idOrdine);
-        console.log(fatturaFiltrata, "ffffffffffffffffffffff");
+        console.log(fatturaFiltrata, ok, "ffffffffffffffffffffff", data);
         dispatch({
           type: ADD_ID_FATTURA,
           payload: fatturaFiltrata[0].id,
         });
+        dispatch(getFattura(fatturaFiltrata[0].id, token));
       }
     } catch (error) {
       alert("testComment", error);
@@ -373,7 +501,6 @@ export function getFattura(idFattura, token) {
       if (response.ok) {
         const data = await response.json();
         console.log(data, "ss");
-
         dispatch({
           type: FATTURA,
           payload: data,
@@ -382,5 +509,61 @@ export function getFattura(idFattura, token) {
     } catch (error) {
       alert("testComment", error);
     }
+  };
+}
+
+export function getFatture(token, idUser) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/fattura`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const fattureFiltrate = data.filter((e) => e.ordine.user.id === idUser);
+        console.log(fattureFiltrate, "xxxxxxxxxxxxxxxxxxxxxxxxxx", data);
+        dispatch({
+          type: FATTURE,
+          payload: fattureFiltrate,
+        });
+      }
+    } catch (error) {
+      alert("testComment", error);
+    }
+  };
+}
+
+export function svuotaCarrello() {
+  return (dispatch) => {
+    dispatch({
+      type: CARRELLO,
+      payload: {},
+    });
+  };
+}
+
+export function svuotaFattura() {
+  return (dispatch) => {
+    dispatch({
+      type: ADD_ID_ORDINE,
+      payload: "",
+    });
+    dispatch({
+      type: ORDINE,
+      payload: {},
+    });
+    dispatch({
+      type: ADD_ID_FATTURA,
+      payload: "",
+    });
+    dispatch({
+      type: FATTURA,
+      payload: {},
+    });
+    window.location.href = "/";
   };
 }

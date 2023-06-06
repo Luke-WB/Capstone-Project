@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { aggiungiArticoliCarrello, getArticoli } from "../redux/action";
-import tasieraLogi from "../assets/img/Tastiera-logi.jpeg";
 
 function Articoli() {
   const dispatch = useDispatch();
@@ -19,16 +18,19 @@ function Articoli() {
       <Container>
         <div className="d-flex justify-content-between flex-wrap ">
           {articolo.map((e, i) => (
-            <Card style={{ width: "18rem" }} key={i} className="mt-5 cardArticoli">
-              <Card.Img variant="top" src={tasieraLogi} />
+            <Card style={{ width: "18rem", height: "37rem" }} key={i} className="mt-5 cardArticoli">
+              <Card.Img variant="top" src={e.img} alt="Immagine articolo" className="img" />
               <Card.Body className="d-flex flex-column justify-content-between">
-                <Card.Title>{e.nome}</Card.Title>
-                <Card.Text className="d-flex flex-column justify-content-between">
-                  <div>
-                    <p>{e.marca}</p>
-                    <p>Descrizione prodotto: {e.descrizione}</p>
-                    <p className="text-center fw-bold">{e.prezzo} €</p>
+                <div>
+                  <Card.Title>{e.nome}</Card.Title>
+                  <Card.Text className="fw-bold">{e.marca}</Card.Text>
+                  <div className="mt-4">
+                    <Card.Text>Descrizione prodotto:</Card.Text>
+                    <Card.Text>{e.descrizione}</Card.Text>
                   </div>
+                </div>
+                <div>
+                  <Card.Text className="text-center fw-bold">{e.prezzo} €</Card.Text>
                   <Button
                     className="button w-100"
                     onClick={() => {
@@ -37,7 +39,7 @@ function Articoli() {
                   >
                     Aggiungi al carrello
                   </Button>
-                </Card.Text>
+                </div>
               </Card.Body>
             </Card>
           ))}

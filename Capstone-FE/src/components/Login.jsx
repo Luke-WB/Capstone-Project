@@ -23,11 +23,11 @@ function Login() {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <Card className="text-center w-25 my-5">
+        <Card className="text-center w-25 my-5 cardCarrello">
           <Card.Body>
-            <Card.Title>Login</Card.Title>
+            <Card.Title className="mb-4">Login</Card.Title>
             <Form>
-              <Form.Group md="4" controlId="validationCustom01">
+              <Form.Group md="4" controlId="validationCustom01" className="mb-4">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   required
@@ -37,7 +37,7 @@ function Login() {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group md="4" controlId="validationCustom02">
+              <Form.Group md="4" controlId="validationCustom02" className="mb-4">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
@@ -49,7 +49,7 @@ function Login() {
               </Form.Group>
             </Form>
             <Button
-              className="my-4"
+              className="mt-2 mb-4  buttonO"
               onClick={() => {
                 dispatch(loginUser(input));
               }}
@@ -57,7 +57,7 @@ function Login() {
               Submit form
             </Button>
             <div>Non sei registrato?</div>
-            <Button href="/registrazione" className="my-2 mb-4">
+            <Button href="/registrazione" className="mt-2 mb-4  buttonO">
               Crea il tuo account!
             </Button>
           </Card.Body>

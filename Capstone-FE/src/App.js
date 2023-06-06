@@ -10,6 +10,9 @@ import Login from "./components/Login";
 import Articoli from "./components/Articoli";
 import Ordine from "./components/Ordine";
 import OrdineConfermato from "./components/OrdineConfermato";
+import User from "./components/User";
+import Ordini from "./components/Ordini";
+import PartnerShip from "./components/PartnerShip";
 
 function App() {
   return (
@@ -19,11 +22,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articoli" element={<Articoli />} />
-          <Route path="/carrello" element={<Carrello />} />
+          <Route path="/partnership" element={<PartnerShip />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrazione" element={<Registrazione />} />
+          <Route path="/carrello" element={<Carrello />} />
           <Route path="/ordine" element={<Ordine />} />
-          <Route path="/fattura" element={<OrdineConfermato />} />
+          <Route path="/ordine-confermato" element={<OrdineConfermato />} />
+          <Route path="/profilo" element={<User />} />
+          <Route path="/ordini" element={<Ordini />} />
         </Routes>
       </BrowserRouter>
       <Footer />

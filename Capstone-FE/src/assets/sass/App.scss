@@ -67,7 +67,10 @@ body {
 
     .form-control {
       border-color: transparent;
-      width: 400px\;;
+      width: 500px;
+      transition-duration: 1s, 1s;
+      transition-property: initial;
+      transition-timing-function: linear;
     }
     .form-control:focus {
       width: 700px;
@@ -80,6 +83,7 @@ body {
 
   .containerHome {
     margin-top: 100px;
+    margin-bottom: 200px;
   }
 
   @mixin sfocus {
@@ -95,7 +99,36 @@ body {
     @include sfocus();
   }
 
-  .cardCarrello {
+  .cardFattura {
+    background-color: $turchese;
+    box-shadow: 0px 0px 20px 5px aqua;
+    .button {
+      background-color: $arancione;
+      border-color: white;
+      width: 50%;
+    }
+    .button:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+    .button:focus {
+      box-shadow: none;
+    }
+    .bordo {
+      border-left: 1px solid white;
+      padding-left: 50px;
+    }
+    img {
+      object-fit: contain;
+    }
+    img:hover {
+      transform: scale(1.2);
+    }
+    .sfondo {
+      background-color: $arancione;
+    }
+  }
+
+  .cardOrdine {
     background-color: $turchese;
     box-shadow: 0px 0px 20px 5px aqua;
     .button {
@@ -105,9 +138,68 @@ body {
     .button:hover {
       box-shadow: 0px 0px 20px 5px aqua;
     }
+    .button:focus {
+      box-shadow: none;
+    }
     .bordo {
       border-left: 1px solid white;
       padding-left: 50px;
+    }
+    img {
+      object-fit: contain;
+    }
+    img:hover {
+      transform: scale(1.2);
+    }
+    .sfondo {
+      background-color: $arancione;
+    }
+  }
+
+  .cardCarrello {
+    background-color: $turchese;
+    box-shadow: 0px 0px 20px 5px aqua;
+    .button {
+      background-color: $turchese;
+      border-color: white;
+    }
+    .button:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+    .button:focus {
+      box-shadow: none;
+    }
+    .buttonO {
+      background-color: $arancione;
+      border-color: white;
+    }
+    .buttonO:hover {
+      box-shadow: 0px 0px 20px 5px aqua;
+    }
+    .buttonO:focus {
+      box-shadow: none;
+    }
+    .bordo {
+      border-left: 1px solid white;
+      padding-left: 50px;
+    }
+    img {
+      object-fit: contain;
+    }
+    img:hover {
+      transform: scale(1.2);
+    }
+    .sfondo {
+      background-color: $arancione;
+    }
+    .form-control {
+      border-color: transparent;
+    }
+    .form-control:focus {
+      box-shadow: 0px 0px 10px 5px aqua;
+    }
+    .form-control::placeholder {
+      color: $turchese;
     }
   }
 
@@ -118,7 +210,13 @@ body {
       border-top: 1px solid white;
       background-color: $turchese;
     }
-
+    .img {
+      object-fit: contain;
+      height: 40%;
+    }
+    .img:hover {
+      transform: scale(1.3);
+    }
     .button {
       background-color: $arancione;
       border-color: white;
@@ -131,8 +229,21 @@ body {
     }
   }
 
+  .jo {
+    background-color: $arancione;
+    border-color: white;
+  }
+  .jo:hover {
+    background-color: $arancione;
+    border-color: white;
+
+    box-shadow: 0px 0px 20px 5px aqua;
+  }
+
   .partner {
     background-color: $bianco-turchese;
+    padding-top: 100px;
+    padding-bottom: 200px;
   }
 
   .footer {
@@ -206,4 +317,82 @@ body {
   border-top-left-radius: 7px;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
+}
+
+.modaleUser {
+  background-color: $viola;
+  box-shadow: 0px 0px 40px 5px aqua;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  .button {
+    background-color: $arancione;
+    border-color: white;
+  }
+  .button:hover {
+    box-shadow: 0px 0px 20px 5px aqua;
+  }
+  .button:focus {
+    box-shadow: none;
+  }
+  .form-control {
+    border-color: transparent;
+  }
+  .form-control:focus {
+    box-shadow: 0px 0px 10px 5px aqua;
+  }
+  .form-control::placeholder {
+    color: $turchese;
+  }
+}
+
+.pacco {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .q {
+    width: 25px;
+    height: 25px;
+    background-color: $arancione;
+    border-radius: 5px;
+  }
+  .l {
+    height: 200px;
+    border: 2px solid $arancione;
+    background-color: $arancione;
+  }
+  .qn {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 5px;
+  }
+  .ln {
+    height: 200px;
+    border: 2px solid white;
+    background-color: white;
+  }
+  .q:hover {
+    box-shadow: 0px 0px 10px 5px aqua;
+  }
+}
+.padre {
+  position: relative;
+  .figlios {
+    position: absolute;
+    left: 80px;
+    bottom: 250px;
+    width: 150px;
+  }
+  .figlioi {
+    position: absolute;
+    left: 80px;
+    bottom: 100px;
+    width: 150px;
+  }
+  .figlioc {
+    margin-top: 20px;
+  }
 }

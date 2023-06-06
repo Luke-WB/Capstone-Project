@@ -1,53 +1,54 @@
-import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useEffect } from "react";
+import { Button, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { creaOrdine, getCarrello, rimuoviArticoliCarrello } from "../redux/action";
+import { creaOrdine, rimuoviArticoliCarrello, trovaIdCarrello } from "../redux/action";
 
 function Carrello() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
   const carrello = useSelector((state) => state.user.carrello);
-  const user = useSelector((state) => state.user.user);
+  const idUser = useSelector((state) => state.user.idUser);
   const idCarrello = useSelector((state) => state.user.idCarrello);
-  console.log(idCarrello);
 
   useEffect(() => {
-    dispatch(getCarrello(idCarrello, token));
+    dispatch(trovaIdCarrello(idUser, token));
   }, []);
 
   return (
     <>
       <Container className="my-5">
-        <Card className="mt-5 sfondo">
+        <Card className="mt-5 cardCarrello">
           <Card.Header>Riepilogo Carrello</Card.Header>
-          <Card.Body>
-            <Card.Title>Special title treatment</Card.Title>
-            <Card.Text>With supporting text below as a natural lead-in to additional content.</Card.Text>
+          <Card.Body className="ms-4">
+            <Card.Title className="mb-4">Articoli aggiunti al carrello: {carrello.articoli.length}</Card.Title>
             {carrello.articoli.map((e, i) => (
-              <Card body key={i} className="w-50 mb-5 cardCarrello">
+              <Card body key={i} className="w-50 mb-4 sfondo">
                 <div className="d-flex justify-content-between align-items-center">
-                  <div className="d-flex ">
+                  <div className="d-flex">
                     <img src={e.img} alt="Immagine articolo" className="w-25" />
-                    <div className="d-lfex flex-column">
+                    <div className="d-flex flex-column justify-content-between ms-4">
                       <p>{e.nome}</p>
                       <p>{e.marca}</p>
-                      <p>$ {e.prezzo}</p>
+                      <p className="fw-bold">$ {e.prezzo}</p>
                     </div>
                   </div>
                   <div>
                     <Button
                       className="button"
-                      onClick={() => {
-                        dispatch(rimuoviArticoliCarrello(idCarrello, e.id, token));
-                      }}
+                      onClick={() => dispatch(rimuoviArticoliCarrello(idCarrello, e.id, token))}
                     >
-                      DELETE
+                      Rimuovi
                     </Button>
                   </div>
                 </div>
               </Card>
             ))}
-            <Button className="button" onClick={() => dispatch(creaOrdine(user.id, idCarrello, token))}>
+            <Button
+              className="buttonO my-4"
+              onClick={() => {
+                dispatch(creaOrdine(idUser, idCarrello, token));
+              }}
+            >
               Procedi all'ordine
             </Button>
           </Card.Body>
