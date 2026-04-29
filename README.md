@@ -1,6 +1,7 @@
 # 🚀 E-commerce Gaming
 
 E-commerce dedicato alla vendita di attrezzature da gaming, pensato per un’esperienza simile a quella utilizzata dai pro player.
+
 Il sistema include autenticazione utenti, gestione profilo, storico ordini e fatturazione, replicando il flusso completo di un e-commerce moderno.
 
 ---
