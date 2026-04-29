@@ -46,6 +46,7 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Autenticazione basata su JWT
 - Interfaccia responsive e moderna
 
+
 ## ⚙️ Setup
 
 ### Clone repo
