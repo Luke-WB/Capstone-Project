@@ -1,14 +1,16 @@
-# Nome Progetto 🚀
+# 🚀 E-commerce Gaming
 
-Breve descrizione del progetto in 1–2 righe.
+E-commerce dedicato alla vendita di attrezzature da gaming, pensato per un’esperienza simile a quella utilizzata dai pro player.
+Il sistema include autenticazione utenti, gestione profilo, storico ordini e fatturazione, replicando il flusso completo di un e-commerce moderno.
 
 ---
 
 ## 🧠 Overview
 
-- Problema risolto
-- Obiettivo del progetto
-- Contesto d’uso
+- E-commerce per attrezzature da gaming
+- Esperienza utente completa con gestione account e acquisti
+- Sistema di ordini, fatturazione e profili utente
+- Struttura ispirata a un e-commerce reale
 
 ---
 
@@ -18,7 +20,6 @@ Breve descrizione del progetto in 1–2 righe.
 - React
 - Redux
 - Sass / Bootstrap
-- Axios
 
 ### 🔧 Backend
 - Java
@@ -30,10 +31,9 @@ Breve descrizione del progetto in 1–2 righe.
 - PostgreSQL
 
 ### 🧪 Tools
-- Git
-- Node.js
 - Postman
-- Maven
+- Node.js
+- Git
 
 ---
 
