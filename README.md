@@ -13,28 +13,28 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Sistema di ordini, fatturazione e profili utente
 - Struttura ispirata a un e-commerce reale
 
-## ⚙️ Tech Stack
+## ⚙️ - Tech Stack
 
-### 🌐 Frontend
+### 🌐 - Frontend
 - React
 - Redux
 - Sass / Bootstrap
 
-### 🔧 Backend
+### 🔧 - Backend
 - Java
 - Spring Boot
 - Spring Security
 - JWT Authentication
 
-### 🗄️ Database
+### 🗄️ - Database
 - PostgreSQL
 
-### 🧪 Tools
+### 🧪 - Tools
 - Postman
 - Node.js
 - Git
 
-## 🔐 Features
+## 🔐 - Features
 
 - Sistema di autenticazione utenti (login / register)
 - Gestione profilo utente
@@ -46,32 +46,32 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Autenticazione basata su JWT
 - Interfaccia responsive e moderna
 
-## ⚙️ Setup
+## ⚙️ - Setup
 
-### 📦 1. Clona il progetto
+### 📦 - 1. Clona il progetto
 ```bash
 git clone https://github.com/luke-wb/Capstone-Project.git
 ```
 
-### 🗄️ 2. Crea il database PostgreSQL
+### 🗄️ - 2. Crea il database PostgreSQL
 ```bash 
 CREATE DATABASE CapstoneProject;
 ```
 
-### 🔧 3. Avvia il backend
+### 🔧 - 3. Avvia il backend
 ```bash 
 cd Capstone-BE
 mvn clean install
 mvn spring-boot:run
 ```
 
-### 🌐 4. Installa il frontend
+### 🌐 - 4. Installa il frontend
 ```bash 
 cd Capstone-FE
 npm install
 ```
 
-### 🚀 5. Avvia il frontend
+### 🚀 - 5. Avvia il frontend
 ```bash 
 npm start
 ```
