@@ -13,7 +13,6 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Sistema di ordini, fatturazione e profili utente
 - Struttura ispirata a un e-commerce reale
 
-
 ## ⚙️ Tech Stack
 
 ### 🌐 Frontend
@@ -35,7 +34,6 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Node.js
 - Git
 
-
 ## 🔐 Features
 
 - Sistema di autenticazione utenti (login / register)
@@ -47,14 +45,6 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - API REST sicure con Spring Security
 - Autenticazione basata su JWT
 - Interfaccia responsive e moderna
-
-
-## 📸 Screenshots
-
-![home](./screenshots/home.png)
-![dashboard](./screenshots/dashboard.png)
-
----
 
 ## ⚙️ Setup
 
