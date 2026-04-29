@@ -1,7 +1,7 @@
 # 🚀 E-commerce Gaming
 
 E-commerce dedicato alla vendita di attrezzature da gaming, pensato per un’esperienza simile a quella utilizzata dai pro player.
-
+</br>
 Il sistema include autenticazione utenti, gestione profilo, storico ordini e fatturazione, replicando il flusso completo di un e-commerce moderno.
 
 ---
@@ -50,8 +50,28 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 
 ### 📦 1. Clona il progetto
 ```bash
-git clone https://github.com/luke-wb/Capston-Project.git
+git clone https://github.com/luke-wb/Capstone-Project.git
+```
 
-### okok
+### 🗄️ 2. Crea il database PostgreSQL
+```bash 
+CREATE DATABASE CapstoneProject;
+```
 
+### 🔧 3. Avvia il backend
+```bash 
+cd Capstone-BE
+mvn clean install
+mvn spring-boot:run
+```
 
+### 🌐 4. Installa il frontend
+```bash 
+cd Capstone-FE
+npm install
+```
+
+### 🚀 5. Avvia il frontend
+```bash 
+npm start
+```
