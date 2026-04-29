@@ -46,9 +46,12 @@ Il sistema include autenticazione utenti, gestione profilo, storico ordini e fat
 - Autenticazione basata su JWT
 - Interfaccia responsive e moderna
 
-
 ## ⚙️ Setup
 
-### Clone repo
+### 📦 1. Clona il progetto
 ```bash
-git clone https://github.com/tuo-utente/nome-progetto.git
+git clone https://github.com/luke-wb/Capston-Project.git
+
+### okok
+
+
